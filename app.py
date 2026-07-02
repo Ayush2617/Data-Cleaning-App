@@ -33,4 +33,35 @@ else:
 
 
 #Showing number of records
-print(f"Dataset contains tatal rows: {}\n total colmn:{}")
+print(f"Dataset contains tatal rows: {data.shape[0]}\n total colmn:{data.shape[1]}")
+
+#start cleaning
+
+#checking duplicate
+duplicates=data.duplicated()
+total_duplicate=data.duplicated().sum()
+
+print(f"Dtataset has total duplicates record:{total_duplicate}")
+
+#Saving duplicates
+if total_duplicate>0:
+    duplicate_records=data[duplicates]
+    duplicate_records.to_csv(f'{data_name}duplicate.csv', index=None)
+
+#Deleting duplicate
+df=data.drop_duplicates()
+
+#Finding missing values
+total_missing_vales=df.isnull().sum().sum()
+missing_vales_columns=df.isnull().sum()
+
+print(f'Dataset has total mising value:{total_missing_vales}')
+print(f"Dtataset contains missing value by column \n {missing_vales_columns}")
+
+
+#Dealing with misssing values 
+#fillna--int and float
+#Dropna--any object
+
+
+
